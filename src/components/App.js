@@ -2,6 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Header from './Header';
 import { connect } from 'react-redux';
+import { Route, Switch } from 'react-router-dom';
+
+import Home from './Home';
+import Register from './Register';
 
 const mapStateToProps = state => ({
   appLoaded: state.common.appLoaded,
@@ -42,7 +46,10 @@ class App extends React.Component {
           <Header
             appName={this.props.appName}
             currentUser={this.props.currentUser} />
-          {this.props.children}
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route path="/register" component={Register} />
+            </Switch>
         </div>
       );
     }

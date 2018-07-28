@@ -1,15 +1,15 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 
 const LoggedOutView = props => {
   if (!props.currentUser) {
     return (
       <ul className="nav-right">
         <li>
-          <a href="">Sign In</a>
+          <Link to="login">Sign In</Link>
         </li>
         <li>
-          <a href="">Register</a>
+          <Link to="register">Register</Link>
         </li>
       </ul>
     )
@@ -33,9 +33,9 @@ class Header extends React.Component {
         <nav className="navbar navbar-main">
           <ul className="nav-left">
             <li>
-              <a href="" className="logo">
+              <Link to="/" className="logo">
                 {this.props.appName}
-              </a>
+              </Link>
             </li>
           </ul>
 
