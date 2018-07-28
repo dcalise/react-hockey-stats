@@ -1,0 +1,38 @@
+@import './normalize';
+@import './variables';
+
+body {
+  font-family: sans-serif;
+  color: $text-color;
+}
+
+.navbar {
+  &.navbar-main {
+    background: $primary-color;
+    color: $text-color-light;
+    height: 50px;
+  }
+  .nav-right {
+    float: right;
+  }
+  li a {
+    display: inline-block;
+    padding: 17px 16px;
+    color: $text-color-light;
+    text-decoration: none;
+    &:hover, &:focus, &.active {
+      background: $primary-color-dark;
+    }
+  }
+  .logo {
+    font-weight: bold;
+  }
+}
+.nav-left,
+.nav-right {
+  display: inline-block;
+  list-style: none;
+  li {
+    float: left;
+  }
+}
