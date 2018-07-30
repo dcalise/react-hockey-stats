@@ -12,7 +12,7 @@ export default (state = defaultState, action) => {
         currentUser: action.payload || null
       }
     case 'LOGOUT':
-      return { ...state, redirectTo: '/', token: null, currentUser: null };
+      return { ...state, redirectTo: '/', currentUser: null };
     case 'LOGIN':
     case 'REGISTER':
       return {
