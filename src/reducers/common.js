@@ -8,9 +8,8 @@ export default (state = defaultState, action) => {
     case 'APP_LOAD':
       return {
         ...state,
-        token: action.token || null,
         appLoaded: true,
-        currentUser: action.payload ? action.payload.user : null
+        currentUser: action.payload || null
       }
     case 'LOGOUT':
       return { ...state, redirectTo: '/', token: null, currentUser: null };
@@ -19,7 +18,6 @@ export default (state = defaultState, action) => {
       return {
         ...state,
         redirectTo: action.error ? null : '/',
-        token: action.error ? null : action.payload.user.token,
         currentUser: action.error ? null : action.payload.user
       };
     default:

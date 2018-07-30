@@ -1,8 +1,11 @@
 export default (state = {}, action) => {
   switch (action.type) {
+    case 'FETCH_USER':
+      return {
+        currentUser: action.payload || null
+      }
     case 'LOGIN':
     case 'REGISTER':
-      console.log(action);
       return {
         ...state,
         inProgress: false,

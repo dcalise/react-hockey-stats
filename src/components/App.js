@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import Header from './Header';
 import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
-import 'flexboxgrid/dist/flexboxgrid.min.css'
+import 'flexboxgrid/dist/flexboxgrid.min.css';
+import { Auth } from "../config/agent";
 
 import Home from './Home';
 import Register from './Register';
@@ -16,21 +17,26 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onLoad: (payload, token) =>
-    dispatch({ type: 'APP_LOAD', payload, token }),
+  onLoad: () => {
+    Auth.onAuthStateChanged(user => {
+      if (user) {
+        console.log(user);
+        dispatch({ type: 'APP_LOAD', payload: user});
+      } else {
+        dispatch({ type: 'APP_LOAD', payload: null});
+      }
+    });
+  },
   onRedirect: () =>
     dispatch({ type: 'REDIRECT' })
 });
 
 class App extends React.Component {
   componentWillMount() {
-    const token = window.localStorage.getItem('jwt');
-    if (token) {
-      // agent.setToken(token);
-    }
-
+    // this.props.fetchUser();
+    this.props.onLoad();
     // this.props.onLoad(token ? agent.Auth.current() : null, token);
-    this.props.onLoad(token ? null : null, token);
+    // this.props.onLoad(token ? null : null, token);
   }
 
   componentWillReceiveProps(nextProps) {

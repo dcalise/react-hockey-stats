@@ -4,8 +4,6 @@ class ListErrors extends React.Component {
   render() {
     let errors = this.props.errors;
     
-    console.log(typeof errors);
-    
     if (errors) {
       if (typeof errors === 'string') {
         return (
