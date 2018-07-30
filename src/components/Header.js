@@ -20,7 +20,11 @@ const LoggedOutView = props => {
 const LoggedInView = props => {
   if (props.currentUser) {
     return (
-      <div>logged in</div>
+      <ul className="nav-right">
+        <li>
+          <Link to="profile">Profile</Link>
+        </li>
+      </ul>
     )
   }
   return null;
