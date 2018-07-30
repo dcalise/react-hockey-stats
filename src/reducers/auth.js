@@ -2,10 +2,11 @@ export default (state = {}, action) => {
   switch (action.type) {
     case 'LOGIN':
     case 'REGISTER':
+      console.log(action);
       return {
         ...state,
         inProgress: false,
-        errors: action.error ? action.payload.errors : null
+        errors: action.error ? action.error.message : null
       };
     case 'LOGIN_PAGE_UNLOADED':
     case 'REGISTER_PAGE_UNLOADED':

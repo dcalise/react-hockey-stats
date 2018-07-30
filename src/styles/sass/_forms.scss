@@ -1,0 +1,23 @@
+fieldset {
+  padding: 0;
+  border: 0;
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: $padding-vertical;
+}
+
+.form-input {
+  display: block;
+  width: 100%;
+  padding: $form-padding;
+  font-size: $form-font-size;
+  line-height: $form-line-height;
+  background-color: #fff;
+  border: 1px solid $gray-lighter;
+  border-radius: $form-border-radius;
+  transition: border-color 0.2s ease-out, box-shadow 0.2s ease-out;
+  &:focus {
+    border-color: $primary-color;
+    box-shadow: 0px 1px 5px rgba($primary-color-light, 0.8);
+  }
+}

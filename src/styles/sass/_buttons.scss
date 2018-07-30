@@ -1,0 +1,30 @@
+.btn {
+  background: #fff;
+  padding: $form-padding;
+  font-size: $form-font-size;
+  line-height: $form-line-height;
+  border: 1px solid $gray-medium;
+  border-radius: $form-border-radius;
+  transition: background 0.2s ease-out, border-color 0.2s ease-out;
+  cursor: pointer;
+  
+  &:hover, &:focus, &:active {
+    background: $gray-light;
+    border-color: darken($gray-medium, 10%);
+  }
+  
+  &.btn-primary {
+    background: $primary-color;
+    color: $text-color-light;
+    border-color: $primary-color;
+    &:hover, &:focus, &:active {
+      background: darken($primary-color, 10%);
+      border-color: darken($primary-color, 10%);
+    }
+  }
+
+  &.btn-block {
+    display: block;
+    width: 100%;
+  }
+}

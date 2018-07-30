@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Header from './Header';
 import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
+import 'flexboxgrid/dist/flexboxgrid.min.css'
 
 import Home from './Home';
 import Register from './Register';

@@ -6,5 +6,30 @@ $accent-color:          #FFEB3B;
 $text-color:            #212121;
 $text-color-light:      #fff;
 
+$danger-color:          #cf0f0f;
+
 $gray-medium:           #757575;
 $gray-light:            #BDBDBD;
+$gray-lighter:           lighten($gray-light, 10%);
+
+//screen sizes
+$screen-lg:               1280px;
+$screen-md:               992px;
+$screen-sm:               768px;
+$screen-xs:               480px;
+
+$screen-lg-min:           $screen-md + 1;
+$screen-md-min:           $screen-sm + 1;
+$screen-sm-min:           $screen-xs + 1;
+
+// padding
+$padding-vertical:        .375rem;
+$padding-horizontal:      .75rem;
+
+$border-radius-base:      .1rem;
+
+// forms
+$form-padding:            $padding-vertical $padding-horizontal;
+$form-font-size:          1rem;
+$form-line-height:        1.5;
+$form-border-radius:      $border-radius-base;

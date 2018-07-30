@@ -1,0 +1,14 @@
+.alert {
+  margin-bottom: ($padding-vertical * 4);
+  padding: ($padding-vertical * 2) ($padding-horizontal * 2);
+  border: 2px solid $gray-light;
+  border-radius: $border-radius-base;
+  color: $gray-medium;
+  font-weight: bold;
+
+  &.alert-danger {
+    border-color: $danger-color;
+    color: $danger-color;
+    background: rgba($danger-color, 0.1);
+  }
+}
