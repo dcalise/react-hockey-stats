@@ -1,6 +1,5 @@
-import ListErrors from './ListErrors';
 import React from 'react';
-import Auth from '../config/agent';
+import { Auth } from '../config/agent';
 import { connect } from 'react-redux';
 
 const mapStateToProps = state => ({
@@ -11,7 +10,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   onClickLogout: () => {
     Auth.signOut().then(
-      () => dispatch({ type: 'LOGOUT '}),
+      () => dispatch({ type: 'LOGOUT'}),
       (error) => console.log(error)
     )
   },

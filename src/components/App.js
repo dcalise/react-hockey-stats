@@ -37,7 +37,6 @@ class App extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(this);
     if (nextProps.redirectTo) {
       this.props.history.replace(nextProps.redirectTo);
       this.props.onRedirect();
