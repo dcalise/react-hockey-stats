@@ -61,7 +61,7 @@ class Register extends React.Component {
                     className="form-input"
                     type="text"
                     placeholder="Email"
-                    value={this.props.email}
+                    value={this.props.email || ''}
                     onChange={this.changeEmail} />
                 </fieldset>
                 <fieldset>
@@ -69,7 +69,7 @@ class Register extends React.Component {
                     className="form-input"
                     type="text"
                     placeholder="Password"
-                    value={this.props.password}
+                    value={this.props.password || ''}
                     onChange={this.changePassword} />
                 </fieldset>
                 <button

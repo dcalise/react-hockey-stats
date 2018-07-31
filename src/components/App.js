@@ -8,6 +8,7 @@ import { Auth } from "../config/agent";
 
 import Home from './Home';
 import Register from './Register';
+import Login from './Login';
 import Profile from './Profile';
 
 const mapStateToProps = state => ({
@@ -53,6 +54,7 @@ class App extends React.Component {
             <Switch>
               <Route exact path="/" component={Home} />
               <Route path="/register" component={Register} />
+              <Route path="/login" component={Login} />
               <Route path="/profile" component={Profile} />
             </Switch>
         </div>
