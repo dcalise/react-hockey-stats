@@ -11,12 +11,19 @@ const mapDispatchToProps = dispatch => ({
     dispatch({ type: 'UPDATE_FIELD_AUTH', key: 'email', value }),
   onChangePassword: value =>
     dispatch({ type: 'UPDATE_FIELD_AUTH', key: 'password', value }),
-  onSubmit: (email, password) => {
-    Auth.createUserWithEmailAndPassword(email, password).then((payload) => {
-      dispatch({ type: 'REGISTER', payload });
-    }, (error) => {
+  onChangeConfirmPassword: value =>
+    dispatch({ type: 'UPDATE_FIELD_AUTH', key: 'confirmPassword', value }),
+  onSubmit: (email, password, confirmPassword) => {
+    if (password !== confirmPassword) {
+      let error = {message: 'The passwords do not match'};
       dispatch({ type: 'REGISTER', error });
-    });
+    } else {
+      Auth.createUserWithEmailAndPassword(email, password).then((payload) => {
+        dispatch({ type: 'REGISTER', payload });
+      }, (error) => {
+        dispatch({ type: 'REGISTER', error });
+      });
+    }
   },
   onUnload: () =>
     dispatch({ type: 'REGISTER_PAGE_UNLOADED' })
@@ -27,9 +34,10 @@ class Register extends React.Component {
     super();
     this.changeEmail = ev => this.props.onChangeEmail(ev.target.value);
     this.changePassword = ev => this.props.onChangePassword(ev.target.value);
-    this.submitForm = (email, password) => ev => {
+    this.changeConfirmPassword = ev => this.props.onChangeConfirmPassword(ev.target.value);
+    this.submitForm = (email, password, confirmPassword) => ev => {
       ev.preventDefault();
-      this.props.onSubmit(email, password);
+      this.props.onSubmit(email, password, confirmPassword);
     }
   }
   
@@ -40,6 +48,7 @@ class Register extends React.Component {
   render() {
     const email = this.props.email;
     const password = this.props.password;
+    const confirmPassword = this.props.confirmPassword;
 
     return (
       <div className="register page">
@@ -55,7 +64,7 @@ class Register extends React.Component {
 
               <ListErrors errors={this.props.errors} />
 
-              <form onSubmit={this.submitForm(email, password)}>
+              <form onSubmit={this.submitForm(email, password, confirmPassword)}>
                 <fieldset>
                   <input
                     className="form-input"
@@ -67,10 +76,18 @@ class Register extends React.Component {
                 <fieldset>
                   <input
                     className="form-input"
-                    type="text"
+                    type="password"
                     placeholder="Password"
                     value={this.props.password || ''}
                     onChange={this.changePassword} />
+                </fieldset>
+                <fieldset>
+                  <input
+                    className="form-input"
+                    type="password"
+                    placeholder="Confirm Password"
+                    value={this.props.confirmPassword || ''}
+                    onChange={this.changeConfirmPassword} />
                 </fieldset>
                 <button
                   className="btn btn-primary btn-block"

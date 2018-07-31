@@ -22,6 +22,7 @@ ul {
 
 .btn {
   background: #fff;
+  color: #212121;
   padding: 0.375rem 0.75rem;
   font-size: 1rem;
   line-height: 1.5;
@@ -38,6 +39,13 @@ ul {
     border-color: #2196F3; }
     .btn.btn-primary:hover, .btn.btn-primary:focus, .btn.btn-primary:active {
       background: #0c7cd5;
+      border-color: #0c7cd5; }
+  .btn.btn-secondary {
+    background: #fff;
+    color: #2196F3;
+    border-color: #2196F3; }
+    .btn.btn-secondary:hover, .btn.btn-secondary:focus, .btn.btn-secondary:active {
+      background: #ebf5fe;
       border-color: #0c7cd5; }
   .btn.btn-block {
     display: block;

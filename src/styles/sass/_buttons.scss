@@ -1,5 +1,6 @@
 .btn {
   background: #fff;
+  color: $text-color;
   padding: $form-padding;
   font-size: $form-font-size;
   line-height: $form-line-height;
@@ -19,6 +20,16 @@
     border-color: $primary-color;
     &:hover, &:focus, &:active {
       background: darken($primary-color, 10%);
+      border-color: darken($primary-color, 10%);
+    }
+  }
+
+  &.btn-secondary {
+    background: #fff;
+    color: $primary-color;
+    border-color: $primary-color;
+    &:hover, &:focus, &:active {
+      background: lighten($primary-color-light, 10%);
       border-color: darken($primary-color, 10%);
     }
   }

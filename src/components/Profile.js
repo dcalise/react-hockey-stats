@@ -24,7 +24,10 @@ class Profile extends React.Component {
         <div className="container">
           <div className="row">
             <div className="col-sm-12">
-              <button onClick={this.props.onClickLogout}>
+              <h1>Profile</h1>
+              <button
+                onClick={this.props.onClickLogout}
+                className="btn btn-secondary">
                 Logout
               </button>
             </div>
