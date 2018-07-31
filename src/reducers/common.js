@@ -14,6 +14,7 @@ export default (state = defaultState, action) => {
     case 'REDIRECT':
       return { ...state, redirectTo: null };
     case 'LOGOUT':
+      console.log('logging-outttt');
       return { ...state, redirectTo: '/', currentUser: null };
     case 'LOGIN':
     case 'REGISTER':
