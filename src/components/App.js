@@ -21,7 +21,6 @@ const mapDispatchToProps = dispatch => ({
   onLoad: () => {
     Auth.onAuthStateChanged(user => {
       if (user) {
-        console.log(user);
         dispatch({ type: 'APP_LOAD', payload: user});
       } else {
         dispatch({ type: 'APP_LOAD', payload: null});
@@ -34,15 +33,13 @@ const mapDispatchToProps = dispatch => ({
 
 class App extends React.Component {
   componentWillMount() {
-    // this.props.fetchUser();
     this.props.onLoad();
-    // this.props.onLoad(token ? agent.Auth.current() : null, token);
-    // this.props.onLoad(token ? null : null, token);
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log(this);
     if (nextProps.redirectTo) {
-      this.context.router.replace(nextProps.redirectTo);
+      this.props.history.replace(nextProps.redirectTo);
       this.props.onRedirect();
     }
   }

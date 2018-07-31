@@ -11,6 +11,8 @@ export default (state = defaultState, action) => {
         appLoaded: true,
         currentUser: action.payload || null
       }
+    case 'REDIRECT':
+      return { ...state, redirectTo: null };
     case 'LOGOUT':
       return { ...state, redirectTo: '/', currentUser: null };
     case 'LOGIN':

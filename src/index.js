@@ -5,7 +5,7 @@ import 'normalize.css/normalize.css';
 import './styles/styles.css';
 import registerServiceWorker from './registerServiceWorker';
 // import { Router, Route, IndexRoute, hashHistory } from 'react-router';
-import { Route, HashRouter } from 'react-router-dom';
+import { Route, BrowserRouter } from 'react-router-dom';
 // import createHashHistory from 'history/createHashHistory';
 
 import App from './components/App';
@@ -18,9 +18,9 @@ import store from './store';
 
 ReactDOM.render((
   <Provider store={store}>
-    <HashRouter>
+    <BrowserRouter>
       <Route path="/" component={App} />
-    </HashRouter>
+    </BrowserRouter>
   </Provider>
 ), document.getElementById('root'));
 registerServiceWorker();
