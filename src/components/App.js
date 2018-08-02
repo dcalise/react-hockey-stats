@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Header from './Header';
 import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import 'flexboxgrid/dist/flexboxgrid.min.css';
-import { Auth } from "../config/agent";
+import { Auth } from '../config/agent';
 
+import Header from './Header';
 import Home from './Home';
 import Register from './Register';
 import Login from './Login';
@@ -15,21 +15,20 @@ const mapStateToProps = state => ({
   appLoaded: state.common.appLoaded,
   appName: state.common.appName,
   currentUser: state.common.currentUser,
-  redirectTo: state.common.redirectTo
+  redirectTo: state.common.redirectTo,
 });
 
 const mapDispatchToProps = dispatch => ({
   onLoad: () => {
-    Auth.onAuthStateChanged(user => {
+    Auth.onAuthStateChanged((user) => {
       if (user) {
-        dispatch({ type: 'APP_LOAD', payload: user});
+        dispatch({ type: 'APP_LOAD', payload: user });
       } else {
-        dispatch({ type: 'APP_LOAD', payload: null});
+        dispatch({ type: 'APP_LOAD', payload: null });
       }
     });
   },
-  onRedirect: () =>
-    dispatch({ type: 'REDIRECT' })
+  onRedirect: () => dispatch({ type: 'REDIRECT' }),
 });
 
 class App extends React.Component {
@@ -50,13 +49,14 @@ class App extends React.Component {
         <div>
           <Header
             appName={this.props.appName}
-            currentUser={this.props.currentUser} />
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route path="/register" component={Register} />
-              <Route path="/login" component={Login} />
-              <Route path="/profile" component={Profile} />
-            </Switch>
+            currentUser={this.props.currentUser}
+          />
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/register" component={Register} />
+            <Route path="/login" component={Login} />
+            <Route path="/profile" component={Profile} />
+          </Switch>
         </div>
       );
     }
@@ -64,7 +64,8 @@ class App extends React.Component {
       <div>
         <Header
           appName={this.props.appName}
-          currentUser={this.props.currentUser} />
+          currentUser={this.props.currentUser}
+        />
           Loading...
       </div>
     );
@@ -72,7 +73,7 @@ class App extends React.Component {
 }
 
 App.contextTypes = {
-  router: PropTypes.object.isRequired
+  router: PropTypes.object.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

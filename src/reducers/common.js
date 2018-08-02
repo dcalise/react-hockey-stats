@@ -1,7 +1,6 @@
 const defaultState = {
   appName: 'Hockey Stats',
-  token: null
-}
+};
 
 export default (state = defaultState, action) => {
   switch (action.type) {
@@ -9,21 +8,20 @@ export default (state = defaultState, action) => {
       return {
         ...state,
         appLoaded: true,
-        currentUser: action.payload || null
-      }
+        currentUser: action.payload || null,
+      };
     case 'REDIRECT':
       return { ...state, redirectTo: null };
     case 'LOGOUT':
-      console.log('logging-outttt');
       return { ...state, redirectTo: '/', currentUser: null };
     case 'LOGIN':
     case 'REGISTER':
       return {
         ...state,
         redirectTo: action.error ? null : '/',
-        currentUser: action.error ? null : action.payload.user
+        currentUser: action.error ? null : action.payload.user,
       };
     default:
       return state;
   }
-}
+};

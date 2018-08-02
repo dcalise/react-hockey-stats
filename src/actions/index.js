@@ -1,5 +1,5 @@
-import { todosRef, Auth } from "../config/firebase";
-import { FETCH_TODOS } from "./types";
+import { todosRef, Auth } from '../config/firebase';
+import { FETCH_TODOS } from './types';
 
 
 export const addToDo = newToDo => async dispatch => {
@@ -11,7 +11,7 @@ export const completeToDo = completeToDoId => async dispatch => {
 };
 
 export const fetchToDos = () => async dispatch => {
-  todosRef.on("value", snapshot => {
+  todosRef.on('value', snapshot => {
     dispatch({
       type: FETCH_TODOS,
       payload: snapshot.val()

@@ -1,36 +1,42 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const LoggedOutView = props => {
+const LoggedOutView = (props) => {
   if (!props.currentUser) {
     return (
       <ul className="nav-right">
         <li>
-          <Link to="login">Sign In</Link>
+          <Link to="login">
+            Sign In
+          </Link>
         </li>
         <li>
-          <Link to="register">Register</Link>
+          <Link to="register">
+            Register
+          </Link>
         </li>
       </ul>
-    )
+    );
   }
   return null;
-}
+};
 
-const LoggedInView = props => {
+const LoggedInView = (props) => {
   if (props.currentUser) {
     return (
       <ul className="nav-right">
         <li>
-          <Link to="profile">Profile</Link>
+          <Link to="profile">
+            Profile
+          </Link>
         </li>
       </ul>
-    )
+    );
   }
   return null;
-}
+};
 
-class Header extends React.Component {
+class Header extends React.PureComponent {
   render() {
     return (
       <div>
@@ -49,7 +55,7 @@ class Header extends React.Component {
 
         </nav>
       </div>
-    )
+    );
   }
 }
 
