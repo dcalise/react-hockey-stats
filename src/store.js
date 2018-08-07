@@ -3,10 +3,12 @@ import reduxThunk from 'redux-thunk';
 
 import auth from './reducers/auth';
 import common from './reducers/common';
+import profile from './reducers/profile';
 
 const reducer = combineReducers({
   auth,
-  common
+  common,
+  profile
 });
 
 const middleware = applyMiddleware(reduxThunk);

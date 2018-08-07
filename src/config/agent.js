@@ -5,10 +5,12 @@ import { FirebaseConfig } from './keys';
 
 firebase.initializeApp(FirebaseConfig);
 
-// const databseRef = firebase.database().ref();
+const databaseRef = firebase.database().ref();
 
 const Auth = firebase.auth();
 
 export default firebase;
+
+export const profilesRef = databaseRef.child('profiles');
 // export const todosRef = databseRef.child('todos');
 export { Auth };
