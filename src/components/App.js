@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import 'flexboxgrid/dist/flexboxgrid.min.css';
-import { Auth } from '../config/agent';
+import * as commonActions from '../actions/common';
 
 import Header from './Header';
 import Home from './Home';
@@ -19,15 +19,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onLoad: () => {
-    Auth.onAuthStateChanged((user) => {
-      if (user) {
-        dispatch({ type: 'APP_LOAD', payload: user });
-      } else {
-        dispatch({ type: 'APP_LOAD', payload: null });
-      }
-    });
-  },
+  onLoad: () => dispatch(commonActions.onLoad()),
   onRedirect: () => dispatch({ type: 'REDIRECT' }),
 });
 
