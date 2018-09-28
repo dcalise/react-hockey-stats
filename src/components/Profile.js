@@ -15,8 +15,6 @@ const mapDispatchToProps = dispatch => ({
       () => dispatch({ type: 'LOGOUT' }),
     );
   },
-  onChangeFirstName: value => dispatch({ type: 'UPDATE_FIELD_PROFILE', key: 'firstName', value }),
-  onChangeLastName: value => dispatch({ type: 'UPDATE_FIELD_PROFILE', key: 'lastName', value }),
   onSubmit: payload => dispatch(
     profileActions.saveProfile(payload)
   ),
@@ -24,16 +22,31 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class Profile extends React.PureComponent {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     
-    this.changeFirstName = ev => this.props.onChangeFirstName(ev.target.value);
-    this.changeLastName = ev => this.props.onChangeLastName(ev.target.value);
-    this.submitForm = (firstName, lastName) => (ev) => {
+    this.state = {
+      firstName: props.currentProfile ? props.currentProfile.firstName : '',
+      lastName: props.currentProfile ? props.currentProfile.lastName : ''
+    }
+
+    this.changeFirstName = ev => this.setState({ firstName: ev.target.value });
+    this.changeLastName = ev => this.setState({ lastName: ev.target.value });
+    this.submitForm = () => (ev) => {
       ev.preventDefault();
+
+      const {firstName, lastName} = this.state;
       this.props.onSubmit({firstName, lastName});
     }
   }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.currentProfile) {
+      const {firstName, lastName} = nextProps.currentProfile;
+      this.setState({firstName, lastName});
+    }
+  }
+
   render() {
     const { firstName, lastName } = this.props;
 
@@ -51,7 +64,7 @@ class Profile extends React.PureComponent {
                     className="form-input"
                     type="text"
                     placeholder="First Name"
-                    value={this.props.firstName || ''}
+                    value={this.state.firstName}
                     onChange={this.changeFirstName}
                   />
                 </fieldset>
@@ -60,7 +73,7 @@ class Profile extends React.PureComponent {
                     className="form-input"
                     type="text"
                     placeholder="Last Name"
-                    value={this.props.lastName || ''}
+                    value={this.state.lastName}
                     onChange={this.changeLastName}
                   />
                 </fieldset>
