@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Auth } from '../config/agent';
-import { saveProfile } from '../actions/profile';
+import * as profileActions from '../actions/profile';
 
 const mapStateToProps = state => ({
   ...state.profile,
@@ -16,9 +16,9 @@ const mapDispatchToProps = dispatch => ({
   },
   onChangeFirstName: value => dispatch({ type: 'UPDATE_FIELD_PROFILE', key: 'firstName', value }),
   onChangeLastName: value => dispatch({ type: 'UPDATE_FIELD_PROFILE', key: 'lastName', value }),
-  onSubmit: (firstName, lastName) => {
-    console.log(firstName, lastName);
-  },
+  onSubmit: payload => dispatch(
+    profileActions.saveProfile(payload)
+  ),
   onUnload: () => dispatch({ type: 'PROFILE_PAGE_UNLOADED' }),
 });
 
@@ -30,7 +30,7 @@ class Profile extends React.PureComponent {
     this.changeLastName = ev => this.props.onChangeLastName(ev.target.value);
     this.submitForm = (firstName, lastName) => (ev) => {
       ev.preventDefault();
-      this.props.onSubmit(firstName, lastName);
+      this.props.onSubmit({firstName, lastName});
     }
   }
   render() {
