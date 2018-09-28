@@ -6,6 +6,7 @@ import * as profileActions from '../actions/profile';
 const mapStateToProps = state => ({
   ...state.profile,
   currentUser: state.common.currentUser,
+  currentProfile: state.common.currentProfile 
 });
 
 const mapDispatchToProps = dispatch => ({

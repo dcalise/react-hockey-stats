@@ -10,6 +10,14 @@ export default (state = defaultState, action) => {
         appLoaded: true,
         currentUser: action.payload || null,
       };
+    case 'GET_CURRENT_USER_PROFILE':
+      return {
+        ...state,
+        currentProfile: {
+          firstName: action.payload.firstName,
+          lastName: action.payload.lastName
+        }
+      }
     case 'REDIRECT':
       return { ...state, redirectTo: null };
     case 'LOGOUT':
