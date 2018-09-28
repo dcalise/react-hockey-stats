@@ -11,6 +11,7 @@ const databseRef = firebase.database().ref();
 const Auth = firebase.auth();
 
 export default firebase;
+export const usersRef = databseRef.child('users');
 export const todosRef = databseRef.child('todos');
 export { Auth };
 
