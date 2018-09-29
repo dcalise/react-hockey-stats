@@ -15,7 +15,10 @@ export default (state = defaultState, action) => {
         ...state,
         currentProfile: {
           firstName: action.payload.firstName,
-          lastName: action.payload.lastName
+          lastName: action.payload.lastName,
+          jerseyNumber: action.payload.jerseyNumber,
+          gender: action.payload.gender,
+          position: action.payload.position
         }
       }
     case 'REDIRECT':
