@@ -7,6 +7,7 @@ import * as commonActions from '../actions/common';
 
 import Header from './Header';
 import Home from './Home';
+import Dashboard from './Dashboard';
 import Register from './Register';
 import Login from './Login';
 import Profile from './Profile';
@@ -45,6 +46,7 @@ class App extends React.Component {
           />
           <Switch>
             <Route exact path="/" component={Home} />
+            <Route path="/dashboard" component={Dashboard} />
             <Route path="/register" component={Register} />
             <Route path="/login" component={Login} />
             <Route path="/profile" component={Profile} />

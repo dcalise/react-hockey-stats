@@ -24,13 +24,22 @@ const LoggedOutView = (props) => {
 const LoggedInView = (props) => {
   if (props.currentUser) {
     return (
-      <ul className="nav-right">
-        <li>
-          <Link to="profile">
-            Profile
-          </Link>
-        </li>
-      </ul>
+      <span className="nav-wrapper">
+        <ul className="nav-left">
+          <li>
+            <Link to="dashboard">
+              Dashboard
+            </Link>
+          </li>
+        </ul>
+        <ul className="nav-right">
+          <li>
+            <Link to="profile">
+              Profile
+            </Link>
+          </li>
+        </ul>
+      </span>
     );
   }
   return null;
