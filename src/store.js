@@ -4,11 +4,13 @@ import reduxThunk from 'redux-thunk';
 import auth from './reducers/auth';
 import common from './reducers/common';
 import profile from './reducers/profile';
+import stats from './reducers/stats';
 
 const reducer = combineReducers({
   auth,
   common,
-  profile
+  profile,
+  stats
 });
 
 const composeEnhancers =

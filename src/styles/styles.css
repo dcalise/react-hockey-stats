@@ -51,6 +51,9 @@ ul {
     display: block;
     width: 100%; }
 
+.btn + .btn {
+  margin-left: 0.75rem; }
+
 fieldset {
   padding: 0;
   border: 0;

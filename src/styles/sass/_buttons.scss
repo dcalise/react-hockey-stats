@@ -39,3 +39,7 @@
     width: 100%;
   }
 }
+
+.btn + .btn {
+  margin-left: $padding-horizontal;
+}
