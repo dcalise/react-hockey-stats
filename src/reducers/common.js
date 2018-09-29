@@ -1,16 +1,18 @@
+import { APP_LOAD, GET_CURRENT_USER_PROFILE, REDIRECT, LOGOUT, LOGIN, REGISTER } from "../actions/types";
+
 const defaultState = {
   appName: 'Hockey Stats',
 };
 
 export default (state = defaultState, action) => {
   switch (action.type) {
-    case 'APP_LOAD':
+    case APP_LOAD:
       return {
         ...state,
         appLoaded: true,
         currentUser: action.payload || null,
       };
-    case 'GET_CURRENT_USER_PROFILE':
+    case GET_CURRENT_USER_PROFILE:
       return {
         ...state,
         currentProfile: {
@@ -21,12 +23,12 @@ export default (state = defaultState, action) => {
           position: action.payload.position
         }
       }
-    case 'REDIRECT':
+    case REDIRECT:
       return { ...state, redirectTo: null };
-    case 'LOGOUT':
+    case LOGOUT:
       return { ...state, redirectTo: '/', currentUser: null };
-    case 'LOGIN':
-    case 'REGISTER':
+    case LOGIN:
+    case REGISTER:
       return {
         ...state,
         redirectTo: action.error ? null : '/',
