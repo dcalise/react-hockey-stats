@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as dashboardActions from '../../actions/dashboard';
+import PropTypes from 'prop-types';
 
 const mapStateToProps = state => ({
   ...state.stats,
@@ -25,8 +26,8 @@ class Dashboard extends React.Component {
     super(props);
 
     this.state = {
-      goals: props.goals ? props.goals : '',
-      assists: props.assists ? props.assists: ''
+      goals: props.goals ? props.goals : 0,
+      assists: props.assists ? props.assists: 0
     }
 
   }
@@ -79,6 +80,16 @@ class Dashboard extends React.Component {
       </div>
     )
   }
+}
+
+Dashboard.propTypes = {
+  goals: PropTypes.number,
+  assists: PropTypes.number
+}
+
+Dashboard.defaultProps = {
+  goals: 0,
+  assists: 0
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
