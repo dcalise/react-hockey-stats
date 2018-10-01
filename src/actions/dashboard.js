@@ -1,4 +1,5 @@
 import { Auth, statsRef } from '../config/agent';
+import { GET_STATS, UPDATE_STATS } from './types';
 
 export const addPoint = (t) => dispatch => {
   let pointType;
@@ -7,7 +8,7 @@ export const addPoint = (t) => dispatch => {
       pointType = 'goals';
       break;
     case 'a':
-      pointType = 'assist';
+      pointType = 'assists';
       break
     default:
       break;
@@ -23,6 +24,22 @@ export const addPoint = (t) => dispatch => {
 
     stats[pointType] = newTotal;
 
-    currentUserStatsRef.update(stats);
+    currentUserStatsRef.update(stats).then(
+      () => {
+        dispatch({
+          type: UPDATE_STATS,
+          payload: stats
+        });
+      }
+    );
+  })
+}
+
+export const getStats = () => dispatch => {
+  statsRef.child(Auth.currentUser.uid).once('value', snapshot => {
+    dispatch({
+      type: GET_STATS,
+      payload: snapshot.val()
+    });
   })
 }

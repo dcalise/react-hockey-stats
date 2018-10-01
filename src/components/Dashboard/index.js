@@ -3,10 +3,14 @@ import { connect } from 'react-redux';
 import * as dashboardActions from '../../actions/dashboard';
 
 const mapStateToProps = state => ({
-  ...state.stats
+  ...state.stats,
+  stats: state.stats
 });
 
 const mapDispatchToProps = dispatch => ({
+  onLoad: () => dispatch(
+    dashboardActions.getStats()
+  ),
   onAddGoal: () => dispatch(
     dashboardActions.addPoint('g')
   ),
@@ -17,9 +21,31 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class Dashboard extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      goals: props.goals ? props.goals : '',
+      assists: props.assists ? props.assists: ''
+    }
+
+  }
+
+  componentWillMount() {
+    this.props.onLoad();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.stats) {
+      const {goals, assists} = nextProps.stats;
+      this.setState({goals, assists});
+    }
+  }
+
   render() {
+
     return (
-      <div className="home page">
+      <div className="dashboard page">
         <div className="container">
           <div className="row">
             <div className="col-sm-12">
@@ -43,7 +69,7 @@ class Dashboard extends React.Component {
 
               <div className="row">
                 <div className="col-sm-12">
-                  Goals: Assists:
+                  Goals: {this.state.goals} Assists: {this.state.assists}
                 </div>
               </div>
 
