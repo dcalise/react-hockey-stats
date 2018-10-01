@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Auth } from '../config/agent';
 import * as profileActions from '../actions/profile';
+import PropTypes from 'prop-types';
 
 const mapStateToProps = state => ({
   ...state.profile,
@@ -157,6 +158,15 @@ class Profile extends React.PureComponent {
       </div>
     );
   }
+}
+
+Profile.propTypes = {
+  firstName: PropTypes.string,
+  lastName: PropTypes.string,
+  jerseyNumber: PropTypes.number,
+  gender: PropTypes.string,
+  position: PropTypes.string,
+  email: PropTypes.string,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);

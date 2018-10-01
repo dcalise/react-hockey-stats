@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as dashboardActions from '../../actions/dashboard';
 import PropTypes from 'prop-types';
+import Schedule from './Schedule';
 
 const mapStateToProps = state => ({
   ...state.stats,
@@ -74,6 +75,11 @@ class Dashboard extends React.Component {
                 </div>
               </div>
 
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-sm-12">
+              <Schedule />
             </div>
           </div>
         </div>
