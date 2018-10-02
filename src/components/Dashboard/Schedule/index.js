@@ -1,19 +1,20 @@
 import React from 'react';
 import moment from 'moment';
 import BigCalendar from 'react-big-calendar';
+import events from './dummyEvents';
 
 const localizer = BigCalendar.momentLocalizer(moment);
 
 const currentUserEventsList = [{
   title: 'test',
-  start: new Date(2018, 9, 2),
-  end: new Date(2018, 9, 3),
+  start: new Date(2018, 9, 2, 21),
+  end: new Date(2018, 9, 2, 22, 30),
   allDay: false
 },
 {
   title: 'test',
-  start: new Date(2018, 9, 4),
-  end: new Date(2018, 9, 4),
+  start: new Date(2018, 9, 4, 21),
+  end: new Date(2018, 9, 4, 22, 30),
   allDay: false
 }];
 
@@ -21,7 +22,7 @@ const CurrentUserSchedule = props => (
   <div>
     <BigCalendar
       localizer={localizer}
-      events={currentUserEventsList}
+      events={events}
       startAcessor="start"
       endAccessor="end"
     />
@@ -29,9 +30,6 @@ const CurrentUserSchedule = props => (
 )
 
 class Schedule extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     return (

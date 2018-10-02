@@ -55,6 +55,9 @@ ul {
 .btn + .btn {
   margin-left: 0.75rem; }
 
+.rbc-calendar {
+  height: 600px; }
+
 fieldset {
   padding: 0;
   border: 0;
