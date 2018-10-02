@@ -4,7 +4,18 @@ import BigCalendar from 'react-big-calendar';
 
 const localizer = BigCalendar.momentLocalizer(moment);
 
-const currentUserEventsList = [];
+const currentUserEventsList = [{
+  title: 'test',
+  start: new Date(2018, 9, 2),
+  end: new Date(2018, 9, 3),
+  allDay: false
+},
+{
+  title: 'test',
+  start: new Date(2018, 9, 4),
+  end: new Date(2018, 9, 4),
+  allDay: false
+}];
 
 const CurrentUserSchedule = props => (
   <div>
