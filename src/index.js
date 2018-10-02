@@ -5,11 +5,8 @@ import 'normalize.css/normalize.css';
 import './styles/styles.css';
 import { Route, BrowserRouter } from 'react-router-dom';
 import registerServiceWorker from './registerServiceWorker';
-// import { Router, Route, IndexRoute, hashHistory } from 'react-router';
-// import createHashHistory from 'history/createHashHistory';
 
 import App from './components/App';
-// import Login from './components/Login';
 
 import store from './store';
 
