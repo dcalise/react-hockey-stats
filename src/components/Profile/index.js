@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Auth } from '../config/agent';
-import * as profileActions from '../actions/profile';
+import { Auth } from '../../config/agent';
+import * as profileActions from '../../actions/profile';
 import PropTypes from 'prop-types';
 
 const mapStateToProps = state => ({
