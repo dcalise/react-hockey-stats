@@ -1,10 +1,9 @@
 import { Auth, profilesRef } from '../config/agent';
-import { UPDATE_PROFILE, GET_CURRENT_USER_PROFILE, GET_PROFILE, GET_PROFILES } from './types';
+import { GET_CURRENT_USER_PROFILE, GET_PROFILE, GET_PROFILES } from './types';
 
 export const saveProfile = payload => dispatch => {
   profilesRef.child(Auth.currentUser.uid).update(payload).then(
     () => {
-      dispatch({ type: UPDATE_PROFILE })
       dispatch({ type: GET_CURRENT_USER_PROFILE, payload})
     },
     error => console.error(error)
