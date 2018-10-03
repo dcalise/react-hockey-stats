@@ -5,9 +5,8 @@ import * as profileActions from '../../actions/profile';
 import PropTypes from 'prop-types';
 
 const mapStateToProps = state => ({
-  ...state.profile,
   currentUser: state.common.currentUser,
-  currentProfile: state.common.currentProfile 
+  currentProfile: { ...state.common.currentProfile }
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -25,15 +24,8 @@ const mapDispatchToProps = dispatch => ({
 class Profile extends React.PureComponent {
   constructor(props) {
     super(props);
-    
-    this.state = {
-      firstName: props.currentProfile ? props.currentProfile.firstName : '',
-      lastName: props.currentProfile ? props.currentProfile.lastName : '',
-      jerseyNumber: props.currentProfile ? props.currentProfile.jerseyNumber : '',
-      gender: props.currentProfile ? props.currentProfile.gender : '',
-      position: props.currentProfile ? props.currentProfile.position : [],
-      email: props.currentUser.email
-    }
+
+    this.state = { ...props.currentProfile, email: props.currentUser.email };
 
     this.changeFirstName = ev => this.setState({ firstName: ev.target.value });
     this.changeLastName = ev => this.setState({ lastName: ev.target.value });
@@ -43,7 +35,7 @@ class Profile extends React.PureComponent {
       const position = [...ev.target.options].filter(({selected}) => selected).map(({value}) => value);
       this.setState({ position });
     }
-    this.submitForm = () => (ev) => {
+    this.submitForm = ev => {
       ev.preventDefault();
 
       const {firstName, lastName, jerseyNumber, gender, position} = this.state;
@@ -59,7 +51,6 @@ class Profile extends React.PureComponent {
   }
 
   render() {
-    const { firstName, lastName, jerseyNumber, gender, position } = this.props;
 
     return (
       <div className="settings page">
@@ -69,7 +60,7 @@ class Profile extends React.PureComponent {
               <h1>
                 Profile
               </h1>
-              <form onSubmit={this.submitForm(firstName, lastName, jerseyNumber, gender, position)}>
+              <form onSubmit={this.submitForm}>
                 <h4>Personal</h4>
                 <fieldset>
                   <input 
@@ -130,7 +121,7 @@ class Profile extends React.PureComponent {
                     className="form-input"
                     type="text"
                     placeholder="Jersey Number"
-                    value={this.state.jerseyNumber}
+                    value={this.state.jerseyNumber || ''}
                     onChange={this.changeJerseyNumber}
                   />
                 </fieldset>

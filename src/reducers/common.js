@@ -1,10 +1,17 @@
 import { APP_LOAD, GET_CURRENT_USER_PROFILE, REDIRECT, LOGOUT, LOGIN, REGISTER } from "../actions/types";
 
-const defaultState = {
+const initialState = {
   appName: 'Hockey Stats',
+  currentProfile: {
+    firstName: '',
+    lastName: '',
+    jerseyNumber: null,
+    gender: '',
+    position: []
+  }
 };
 
-export default (state = defaultState, action) => {
+export default (state = initialState, action) => {
   switch (action.type) {
     case APP_LOAD:
       return {
