@@ -37,9 +37,27 @@ export const addPoint = (t) => dispatch => {
 
 export const getStats = () => dispatch => {
   statsRef.child(Auth.currentUser.uid).once('value', snapshot => {
+    const stats = snapshot.val();
+
+    // set defaults to 0
+    let payload = {
+      goals: 0,
+      assists: 0
+    }
+
+    // if user has stats
+    if (stats) {
+      payload = {
+        goals: stats.goals || 0,
+        assists: stats.assists || 0,
+      }
+    }
+
+    // return stats
     dispatch({
       type: GET_STATS,
-      payload: snapshot.val()
+      payload
     });
-  })
+  });
+
 }

@@ -1,6 +1,11 @@
 import { DASHBOARD_UNLOADED, ADD_GOAL, ADD_ASSIST, GET_STATS, UPDATE_STATS } from "../actions/types";
 
-export default (state = {}, action) => {
+const initialState = {
+  goals: 0,
+  assists: 0
+}
+
+export default (state = initialState, action) => {
   switch (action.type) {
     case DASHBOARD_UNLOADED:
       return {};

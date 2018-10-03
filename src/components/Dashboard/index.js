@@ -5,8 +5,7 @@ import PropTypes from 'prop-types';
 import Schedule from './Schedule';
 
 const mapStateToProps = state => ({
-  ...state.stats,
-  stats: state.stats
+  stats: { ...state.stats }
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -23,28 +22,14 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class Dashboard extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      goals: props.goals ? props.goals : 0,
-      assists: props.assists ? props.assists: 0
-    }
-
-  }
 
   componentWillMount() {
     this.props.onLoad();
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.stats) {
-      const {goals, assists} = nextProps.stats;
-      this.setState({goals, assists});
-    }
-  }
-
   render() {
+
+    const { goals, assists } = this.props.stats;
 
     return (
       <div className="dashboard page">
@@ -71,7 +56,7 @@ class Dashboard extends React.Component {
 
               <div className="row">
                 <div className="col-sm-12">
-                  Goals: {this.state.goals} Assists: {this.state.assists}
+                  Goals: {goals} Assists: {assists}
                 </div>
               </div>
 
@@ -79,7 +64,7 @@ class Dashboard extends React.Component {
           </div>
           <div className="row">
             <div className="col-sm-12">
-              <Schedule />
+              {/* <Schedule /> */}
             </div>
           </div>
         </div>
@@ -88,14 +73,18 @@ class Dashboard extends React.Component {
   }
 }
 
-Dashboard.propTypes = {
-  goals: PropTypes.number,
-  assists: PropTypes.number
-}
+// Dashboard.propTypes = {
+//   stats: {
+//     goals: PropTypes.number,
+//     assists: PropTypes.number,
+//   }
+// }
 
-Dashboard.defaultProps = {
-  goals: 0,
-  assists: 0
-}
+// Dashboard.defaultProps = {
+//   stats: {
+//     goals: 0,
+//     assists: 0
+//   }
+// }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
