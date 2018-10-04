@@ -1,14 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { Auth } from "../config/agent";
 import ListErrors from "./ListErrors";
 import {
   changeEmail,
   changePassword,
   submitLogin,
-  unloadPage
-} from "../actions/login";
+  unloadLoginPage
+} from "../actions/auth";
 
 const mapStateToProps = state => ({ ...state.auth });
 
@@ -16,13 +15,13 @@ const mapDispatchToProps = {
   changeEmail,
   changePassword,
   submitLogin,
-  unloadPage
+  unloadLoginPage
 };
 
 class Login extends React.Component {
 
   componentWillUnmount() {
-    this.props.unloadPage();
+    this.props.unloadLoginPage();
   }
 
   render() {
@@ -54,6 +53,7 @@ class Login extends React.Component {
                       placeholder="Email"
                       value={this.props.email || ""}
                       onChange={this.props.changeEmail}
+                      required
                     />
                   </fieldset>
                   <fieldset>
@@ -63,6 +63,7 @@ class Login extends React.Component {
                       placeholder="Password"
                       value={this.props.password || ""}
                       onChange={this.props.changePassword}
+                      required
                     />
                   </fieldset>
                   <button
