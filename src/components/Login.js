@@ -1,37 +1,28 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { Auth } from '../config/agent';
-import ListErrors from './ListErrors';
+import React from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { Auth } from "../config/agent";
+import ListErrors from "./ListErrors";
+import {
+  changeEmail,
+  changePassword,
+  submitLogin,
+  unloadPage
+} from "../actions/login";
 
 const mapStateToProps = state => ({ ...state.auth });
 
-const mapDispatchToProps = dispatch => ({
-  onChangeEmail: value => dispatch({ type: 'UPDATE_FIELD_AUTH', key: 'email', value }),
-  onChangePassword: value => dispatch({ type: 'UPDATE_FIELD_AUTH', key: 'password', value }),
-  onSubmit: (email, password) => {
-    Auth.signInWithEmailAndPassword(email, password).then((payload) => {
-      dispatch({ type: 'LOGIN', payload });
-    }, (error) => {
-      dispatch({ type: 'LOGIN', error });
-    });
-  },
-  onUnload: () => dispatch({ type: 'LOGIN_PAGE_UNLOADED' }),
-});
+const mapDispatchToProps = {
+  changeEmail,
+  changePassword,
+  submitLogin,
+  unloadPage
+};
 
 class Login extends React.Component {
-  constructor() {
-    super();
-    this.changeEmail = ev => this.props.onChangeEmail(ev.target.value);
-    this.changePassword = ev => this.props.onChangePassword(ev.target.value);
-    this.submitForm = (email, password) => (ev) => {
-      ev.preventDefault();
-      this.props.onSubmit(email, password);
-    };
-  }
 
   componentWillUnmount() {
-    this.props.onUnload();
+    this.props.unloadPage();
   }
 
   render() {
@@ -43,25 +34,26 @@ class Login extends React.Component {
           <div className="row">
             <div className="col-sm-4 col-sm-offset-4">
               <div className="text-center">
-                <h1>
-                  Sign In
-                </h1>
-                <Link to="register">
-                  Need an account?
-                </Link>
+                <h1>Sign In</h1>
+                <Link to="register">Need an account?</Link>
 
                 <hr />
 
                 <ListErrors errors={this.props.errors} />
 
-                <form onSubmit={this.submitForm(email, password)}>
+                <form
+                  onSubmit={ev => {
+                    ev.preventDefault();
+                    this.props.submitLogin(email, password);
+                  }}
+                >
                   <fieldset>
                     <input
                       className="form-input"
                       type="text"
                       placeholder="Email"
-                      value={this.props.email || ''}
-                      onChange={this.changeEmail}
+                      value={this.props.email || ""}
+                      onChange={this.props.changeEmail}
                     />
                   </fieldset>
                   <fieldset>
@@ -69,8 +61,8 @@ class Login extends React.Component {
                       className="form-input"
                       type="password"
                       placeholder="Password"
-                      value={this.props.password || ''}
-                      onChange={this.changePassword}
+                      value={this.props.password || ""}
+                      onChange={this.props.changePassword}
                     />
                   </fieldset>
                   <button
@@ -90,4 +82,7 @@ class Login extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Login);
