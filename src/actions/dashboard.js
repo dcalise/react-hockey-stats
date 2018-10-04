@@ -16,13 +16,17 @@ export const addPoint = (t) => dispatch => {
   const currentUserStatsRef = statsRef.child(Auth.currentUser.uid);
   currentUserStatsRef.once('value', snapshot => {
     let stats = snapshot.val();
-
-    let newTotal = 1;
-    if (stats[pointType]) {
-      newTotal = stats[pointType] + 1;
+    if (stats) {
+      let newTotal = 1;
+      if (stats[pointType]) {
+        newTotal = stats[pointType] + 1;
+      }
+  
+      stats[pointType] = newTotal;
+    } else {
+      stats = {};
+      stats[pointType] = 1;
     }
-
-    stats[pointType] = newTotal;
 
     currentUserStatsRef.update(stats).then(
       () => {
