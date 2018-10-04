@@ -11,7 +11,6 @@ export const UPDATE_FIELD_AUTH  = 'UPDATE_FIELD_AUTH';
 
 // COMMON
 export const APP_LOAD = 'APP_LOAD';
-export const REDIRECT = 'REDIRECT';
 
 // PROFILES
 export const GET_CURRENT_USER_PROFILE = 'GET_CURRENT_USER_PROFILE';
