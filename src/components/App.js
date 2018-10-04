@@ -11,6 +11,7 @@ import Dashboard from './Dashboard';
 import Register from './Register';
 import Login from './Login';
 import Profile from './Profile';
+import { REDIRECT } from '../actions/types';
 
 const mapStateToProps = state => ({
   appLoaded: state.common.appLoaded,
@@ -21,7 +22,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onLoad: () => dispatch(commonActions.onLoad()),
-  onRedirect: () => dispatch({ type: 'REDIRECT' }),
+  onRedirect: () => dispatch({ type: REDIRECT }),
 });
 
 class App extends React.Component {

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Auth } from '../../config/agent';
 import * as profileActions from '../../actions/profile';
 import PropTypes from 'prop-types';
+import { LOGOUT, PROFILE_PAGE_UNLOADED } from '../../actions/types';
 
 const mapStateToProps = state => ({
   currentUser: state.common.currentUser,
@@ -12,13 +13,13 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   onClickLogout: () => {
     Auth.signOut().then(
-      () => dispatch({ type: 'LOGOUT' }),
+      () => dispatch({ type: LOGOUT }),
     );
   },
   onSubmit: payload => dispatch(
     profileActions.saveProfile(payload)
   ),
-  onUnload: () => dispatch({ type: 'PROFILE_PAGE_UNLOADED' }),
+  onUnload: () => dispatch({ type: PROFILE_PAGE_UNLOADED }),
 });
 
 class Profile extends React.PureComponent {

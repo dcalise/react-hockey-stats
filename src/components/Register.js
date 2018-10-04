@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Auth } from '../config/agent';
 import ListErrors from './ListErrors';
 import { changeEmail, changePassword, changeConfirmPassword, submitRegister, unloadRegisterPage } from '../actions/auth';
 
