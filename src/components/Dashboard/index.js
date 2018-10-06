@@ -1,30 +1,29 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import * as dashboardActions from '../../actions/dashboard';
+import { addPoint, getStats } from '../../actions/stats';
+import { unloadDashboard } from '../../actions/dashboard';
 import PropTypes from 'prop-types';
-import Schedule from './Schedule';
+// import Schedule from './Schedule';
 
 const mapStateToProps = state => ({
   stats: { ...state.stats }
 });
 
-const mapDispatchToProps = dispatch => ({
-  onLoad: () => dispatch(
-    dashboardActions.getStats()
-  ),
-  onAddGoal: () => dispatch(
-    dashboardActions.addPoint('g')
-  ),
-  onAddAssist: () => dispatch(
-    dashboardActions.addPoint('a')
-  ),
-  onUnload: () => dispatch({ type: 'DASHBOARD_UNLOADED' })
-});
+const mapDispatchToProps = {
+  getStats,
+  addGoal: () => addPoint('g'),
+  addAssist: () => addPoint('a'),
+  unloadDashboard
+}
 
 class Dashboard extends React.Component {
 
   componentWillMount() {
-    this.props.onLoad();
+    this.props.getStats();
+  }
+
+  componentWillUnmount() {
+    this.props.unloadDashboard();
   }
 
   render() {
@@ -41,7 +40,7 @@ class Dashboard extends React.Component {
               <button
                 type="button"
                 className="btn btn-primary"
-                onClick={this.props.onAddGoal}
+                onClick={() => this.props.addGoal()}
               >
                 Add Goal
               </button>
@@ -49,7 +48,7 @@ class Dashboard extends React.Component {
               <button
                 type="button"
                 className="btn btn-primary"
-                onClick={this.props.onAddAssist}
+                onClick={() => this.props.addAssist()}
               >
                 Add Assist
               </button>
@@ -73,18 +72,11 @@ class Dashboard extends React.Component {
   }
 }
 
-// Dashboard.propTypes = {
-//   stats: {
-//     goals: PropTypes.number,
-//     assists: PropTypes.number,
-//   }
-// }
-
-// Dashboard.defaultProps = {
-//   stats: {
-//     goals: 0,
-//     assists: 0
-//   }
-// }
+Dashboard.propTypes = {
+  stats: PropTypes.shape({
+    goals: PropTypes.number,
+    assists: PropTypes.number,
+  })
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
