@@ -1,9 +1,9 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Auth } from '../../config/agent';
-import * as profileActions from '../../actions/profile';
-import PropTypes from 'prop-types';
-import { LOGOUT, PROFILE_PAGE_UNLOADED } from '../../actions/types';
+import React from "react";
+import { connect } from "react-redux";
+import { Auth } from "../../config/agent";
+import * as profileActions from "../../actions/profile";
+import PropTypes from "prop-types";
+import { LOGOUT, PROFILE_PAGE_UNLOADED } from "../../actions/types";
 
 const mapStateToProps = state => ({
   currentUser: state.common.currentUser,
@@ -12,14 +12,10 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onClickLogout: () => {
-    Auth.signOut().then(
-      () => dispatch({ type: LOGOUT }),
-    );
+    Auth.signOut().then(() => dispatch({ type: LOGOUT }));
   },
-  onSubmit: payload => dispatch(
-    profileActions.saveProfile(payload)
-  ),
-  onUnload: () => dispatch({ type: PROFILE_PAGE_UNLOADED }),
+  onSubmit: payload => dispatch(profileActions.saveProfile(payload)),
+  onUnload: () => dispatch({ type: PROFILE_PAGE_UNLOADED })
 });
 
 class Profile extends React.PureComponent {
@@ -30,41 +26,63 @@ class Profile extends React.PureComponent {
 
     this.changeFirstName = ev => this.setState({ firstName: ev.target.value });
     this.changeLastName = ev => this.setState({ lastName: ev.target.value });
-    this.changeJerseyNumber = ev => this.setState({ jerseyNumber: ev.target.value });
+    this.changeJerseyNumber = ev =>
+      this.setState({ jerseyNumber: ev.target.value });
     this.changeGender = ev => this.setState({ gender: ev.target.value });
     this.changePosition = ev => {
-      const position = [...ev.target.options].filter(({selected}) => selected).map(({value}) => value);
+      const position = [...ev.target.options]
+        .filter(({ selected }) => selected)
+        .map(({ value }) => value);
       this.setState({ position });
-    }
+    };
     this.submitForm = ev => {
       ev.preventDefault();
 
-      const {firstName, lastName, jerseyNumber, gender, position} = this.state;
-      this.props.onSubmit({firstName, lastName, jerseyNumber, gender, position});
-    }
+      const {
+        firstName,
+        lastName,
+        jerseyNumber,
+        gender,
+        position
+      } = this.state;
+      this.props.onSubmit({
+        firstName,
+        lastName,
+        jerseyNumber,
+        gender,
+        position
+      });
+    };
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.currentProfile) {
-      const {firstName, lastName, jerseyNumber, gender, position} = nextProps.currentProfile;
-      this.setState({firstName, lastName, jerseyNumber, gender, position});
+  componentDidUpdate(prevProps) {
+    if (
+      this.props.currentProfile &&
+      this.props.currentProfile !== prevProps.currentProfile
+    ) {
+      console.log("setting");
+      const {
+        firstName,
+        lastName,
+        jerseyNumber,
+        gender,
+        position
+      } = this.props.currentProfile;
+      this.setState({ firstName, lastName, jerseyNumber, gender, position });
     }
   }
 
   render() {
-
     return (
       <div className="settings page">
         <div className="container">
           <div className="row">
             <div className="col-sm-4">
-              <h1>
-                Profile
-              </h1>
+              <h1>Profile</h1>
               <form onSubmit={this.submitForm}>
                 <h4>Personal</h4>
                 <fieldset>
-                  <input 
+                  <input
                     className="form-input"
                     type="text"
                     placeholder="First Name"
@@ -73,7 +91,7 @@ class Profile extends React.PureComponent {
                   />
                 </fieldset>
                 <fieldset>
-                  <input 
+                  <input
                     className="form-input"
                     type="text"
                     placeholder="Last Name"
@@ -83,7 +101,7 @@ class Profile extends React.PureComponent {
                 </fieldset>
 
                 <fieldset>
-                  <input 
+                  <input
                     className="form-input"
                     type="email"
                     value={this.state.email}
@@ -118,11 +136,11 @@ class Profile extends React.PureComponent {
                 </fieldset>
 
                 <fieldset>
-                  <input 
+                  <input
                     className="form-input"
                     type="text"
                     placeholder="Jersey Number"
-                    value={this.state.jerseyNumber || ''}
+                    value={this.state.jerseyNumber || ""}
                     onChange={this.changeJerseyNumber}
                   />
                 </fieldset>
@@ -136,7 +154,7 @@ class Profile extends React.PureComponent {
                 </button>
               </form>
 
-              <hr/>
+              <hr />
               <button
                 type="button"
                 onClick={this.props.onClickLogout}
@@ -158,7 +176,10 @@ Profile.propTypes = {
   jerseyNumber: PropTypes.number,
   gender: PropTypes.string,
   position: PropTypes.string,
-  email: PropTypes.string,
-}
+  email: PropTypes.string
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Profile);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Profile);

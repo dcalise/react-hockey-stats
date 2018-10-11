@@ -1,8 +1,8 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { addPoint, getStats } from '../../actions/stats';
-import { unloadDashboard } from '../../actions/dashboard';
-import PropTypes from 'prop-types';
+import React from "react";
+import { connect } from "react-redux";
+import { addPoint, getStats } from "../../actions/stats";
+import { unloadDashboard } from "../../actions/dashboard";
+import PropTypes from "prop-types";
 // import Schedule from './Schedule';
 
 const mapStateToProps = state => ({
@@ -11,14 +11,13 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   getStats,
-  addGoal: () => addPoint('g'),
-  addAssist: () => addPoint('a'),
+  addGoal: () => addPoint("g"),
+  addAssist: () => addPoint("a"),
   unloadDashboard
-}
+};
 
 class Dashboard extends React.Component {
-
-  componentWillMount() {
+  componentDidMount() {
     this.props.getStats();
   }
 
@@ -27,7 +26,6 @@ class Dashboard extends React.Component {
   }
 
   render() {
-
     const { goals, assists } = this.props.stats;
 
     return (
@@ -58,25 +56,25 @@ class Dashboard extends React.Component {
                   Goals: {goals} Assists: {assists}
                 </div>
               </div>
-
             </div>
           </div>
           <div className="row">
-            <div className="col-sm-12">
-              {/* <Schedule /> */}
-            </div>
+            <div className="col-sm-12">{/* <Schedule /> */}</div>
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
 Dashboard.propTypes = {
   stats: PropTypes.shape({
     goals: PropTypes.number,
-    assists: PropTypes.number,
+    assists: PropTypes.number
   })
-}
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Dashboard);
